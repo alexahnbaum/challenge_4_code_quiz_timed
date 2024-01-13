@@ -1,0 +1,85 @@
+*,
+.container {
+  width: 80vw;
+  margin: 25px auto;
+}
+
+.welcome {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.box__welcome {
+  display: block;
+  float: left;
+  width: fit-content;
+  height: fit-content;
+  padding: 1%;
+  margin: 1%;
+  cursor: pointer;
+  object-fit: cover;
+  border-radius: 8px;
+  background-color: rgb(103, 43, 149);
+  text-align: center;
+  font-size: 18px;
+  color: white;
+}
+
+.gameboard__display__q1__container {
+  display: flex;
+  flex-direction: column;
+}
+.gameboard__display__q2__container {
+  display: flex;
+  flex-direction: column;
+}
+.gameboard__display__q3__container {
+  display: flex;
+  flex-direction: column;
+}
+.gameboard__display__q4__container {
+  display: flex;
+  flex-direction: column;
+}
+.gameboard__display__q5__container {
+  display: flex;
+  flex-direction: column;
+}
+
+.box {
+  display: inline-flex;
+  float: left;
+  width: fit-content;
+  height: fit-content;
+  margin: 1%;
+  padding: 1%;
+  cursor: pointer;
+  object-fit: cover;
+  border-radius: 8px;
+  background-color: rgb(103, 43, 149);
+  text-align: center;
+  font-size: 18px;
+  color: white;
+}
+
+.highscores__container {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.box__highscores {
+  display: block;
+  float: left;
+  width: fit-content;
+  height: fit-content;
+  padding: 1%;
+  margin: 1%;
+  cursor: pointer;
+  object-fit: cover;
+  border-radius: 8px;
+  background-color: rgb(103, 43, 149);
+  text-align: center;
+  font-size: 18px;
+  color: white;
+}

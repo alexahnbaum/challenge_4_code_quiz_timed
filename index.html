@@ -3,12 +3,10 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./assets/css/style.css" />
     <title>Challenge 4 Timed Code Quiz</title>
-    <link rel="stlyesheet" href="./assets/css/style.css" />
   </head>
   <body>
-   
-    <main>
       <section class="welcome">
          <header><h1>Coding Quiz Challenge</h1></header>
          <p>
@@ -16,17 +14,14 @@
            Keep in mind that incorrect answers will penalize your score/time by ten
            seconds!
          </p>
+         <div class="box__welcome">Start Quiz</button>
       </section>
       <section class="highscores">
         <h1>Highscores</h1>
-        <input type="text">
+        <div class="highscores__list">1. AB 30</div>
         <div class="highscores__container">
-            <div class="box" option-choice="1 go back">Go Back</div>
-            <div class="box" option-choice="2 Clear Highscores">Clear Highscores</div>
-            <div class="highscores__container__list"></div>
-        </div>  
-          <div class="highscores__score"></div>
-        </div>
+            <div class="box__highscores" option-choice="1 go back">Go Back</div>
+            <div class="box__highscores" option-choice="2 Clear Highscores">Clear Highscores</div>
       </section>
       <section class="gameboard">
         <div class="gameboard__timer">60</div>
@@ -101,6 +96,14 @@
         </div>
         <div class="gameboard__result"></div>
       </section>
-    </main>
+      <section class="alldone">
+         <h1>All done!</h1>
+         <div class="alldone__finalscore"></div>
+         <label for="initials">Enter Initials</label>
+         <input type="text" id="initials">
+         <input type="submit" value="submit"> 
+      </section>
+
+    <script src="./assets/js/app.js"></script>
   </body>
 </html>

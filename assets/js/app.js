@@ -17,6 +17,39 @@
     var theElement = document.querySelector([CSS Selector for your element]);
  */
 
+var welcomeEl = document.querySelector(".welcome");
+var startQuizBoxEl = document.querySelector(".box__welcome");
+var highscoresEl = document.querySelector(".highscores");
+var highscoresListEl = document.querySelector(".highscores__list");
+var gameboardEL = document.querySelector(".gameboard");
+var gameboardDisplayEl = document.querySelector(".gameboard__display");
+// var gameboardDisplayEl = [];
+// gameboardDisplayEl[0] = document.querySelector(".gameboard__display__q1");
+var gameboardDisplayQ1El = document.querySelector(".gameboard__display__q1");
+var gameboardDisplayQ1ChoicesEl = document.querySelector(
+  ".gameboard__display__q1__container"
+);
+var gameboardDisplayQ2El = document.querySelector(".gameboard__display__q2");
+var gameboardDisplayQ1ChoicesEl = document.querySelector(
+  ".gameboard__display__q2__container"
+);
+var gameboardDisplayQ3El = document.querySelector(".gameboard__display__q3");
+var gameboardDisplayQ3ChoicesEl = document.querySelector(
+  ".gameboard__display__q3__container"
+);
+var gameboardDisplayQ4El = document.querySelector(".gameboard__display__q4");
+var gameboardDisplayQ4ChoicesEl = document.querySelector(
+  ".gameboard__display__q4__container"
+);
+var gameboardDisplayQ5El = document.querySelector(".gameboard__display__q5");
+var gameboardDisplayQ5ChoicesEl = document.querySelector(
+  ".gameboard__display__q5__container"
+);
+var gameboardResultEl = document.querySelector(".gameboard__result");
+var allDoneEl = document.querySelector(".alldone");
+var allDoneFinalScore = document.querySelector(".alldone__finalscore");
+var initialsInput = document.getElementById("initials");
+
 /*
  3. Declare variables: state
     - What are the data that need to be kept track of? 
@@ -32,11 +65,19 @@
       to the event handler?
 */
 
+var timer = null;
+var timeLeft = 0;
+var correctAnswer = 0;
+var incorrectAnswer = 0;
+var currentQuestionIndex;
+
 /*
  4. Declare variables: constants
     - What are the data the application needs that won't change?
     - e.g. Math constants, pre-created content (maybe the questions and answers?)
 */
+
+var kDuration = 30;
 
 /*
  5. Identify events
