@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Challenge 4 Timed Code Quiz</title>
+    <link rel="stlyesheet" href="./assets/css/style.css" />
+  </head>
+  <body>
+   
+    <main>
+      <section class="welcome">
+         <header><h1>Coding Quiz Challenge</h1></header>
+         <p>
+           Try to answer the following code-related questions within the time limit.
+           Keep in mind that incorrect answers will penalize your score/time by ten
+           seconds!
+         </p>
+      </section>
+      <section class="highscores">
+        <h1>Highscores</h1>
+        <input type="text">
+        <div class="highscores__container">
+            <div class="box" option-choice="1 go back">Go Back</div>
+            <div class="box" option-choice="2 Clear Highscores">Clear Highscores</div>
+            <div class="highscores__container__list"></div>
+        </div>  
+          <div class="highscores__score"></div>
+        </div>
+      </section>
+      <section class="gameboard">
+        <div class="gameboard__timer">60</div>
+        <div class="gameboard__display">
+          <div class="gameboard__display__q1">
+            <h1>Commonly used data types DO NOT include:</h1>
+            <div class="gameboard__display__q1__container">
+              <div class="box" answer-choice="1 strings">1 strings</div>
+              <div class="box" answer-choice="2 booleans">2 booleans</div>
+              <div class="box" answer-choice="3 alerts">3 alerts</div>
+              <div class="box" answer-choice="4 numbers">4 numbers</div>
+            </div>
+          </div>
+          <div class="gameboard__display__q2">
+            <h1>
+              The condition in an if / else statement is enclosed within ____.
+            </h1>
+            <div class="gameboard__display__q2__container">
+              <div class="box" answer-choice="1 quotes">1 quotes</div>
+              <div class="box" answer-choice="2 curly brackets">
+                2 curly brackets
+              </div>
+              <div class="box" answer-choice="3 parenthesis">3 parenthesis</div>
+              <div class="box" answer-choice="4 square brackets">
+                4 square brackets
+              </div>
+            </div>
+          </div>
+          <div class="gameboard__display__q3">
+            <h1>Arrays in JavaScript can be used to store ___.</h1>
+            <div class="gameboard__display__q3__container">
+              <div class="box" answer-choice="1 numbers and strings">
+                1 numbers and strings
+              </div>
+              <div class="box" answer-choice="2 other arrays">
+                2 other arrays
+              </div>
+              <div class="box" answer-choice="3 booleans">3 booleans</div>
+              <div class="box" answer-choice="4 all of the above">
+                4 all of the above
+              </div>
+            </div>
+          </div>
+          <div class="gameboard__display__q4">
+            <h1>
+              String values must be enclosed within ___ when being assigned to
+              variables.
+            </h1>
+            <div class="gameboard__display__q4__container">
+              <div class="box" answer-choice="1 commas">1 commas</div>
+              <div class="box" answer-choice="2 curly brackets">
+                2 curly brackets
+              </div>
+              <div class="box" answer-choice="3 quotes">3 quotes</div>
+              <div class="box" answer-choice="4 parenthesis">4 parenthesis</div>
+            </div>
+          </div>
+          <div class="gameboard__display__q5">
+            <h1>
+              A very useful tool used during development and debugging for
+              printing content to the debugger is
+            </h1>
+            <div class="gameboard__display__q5__container">
+              <div class="box" answer-choice="1 JavaScript">1 JavaScript</div>
+              <div class="box" answer-choice="2 terminal / bash">
+                2 terminal / bash
+              </div>
+              <div class="box" answer-choice="3 for loops">3 for loops</div>
+              <div class="box" answer-choice="4 console log">4 console log</div>
+            </div>
+          </div>
+        </div>
+        <div class="gameboard__result"></div>
+      </section>
+    </main>
+  </body>
+</html>
