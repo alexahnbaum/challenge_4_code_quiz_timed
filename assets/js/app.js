@@ -21,26 +21,37 @@ var welcomeEl = document.querySelector(".welcome");
 var startQuizBoxEl = document.querySelector(".box__welcome");
 var highscoresEl = document.querySelector(".highscores");
 var highscoresListEl = document.querySelector(".highscores__list");
+var timerEl = document.querySelector(".timer");
 var gameboardEL = document.querySelector(".gameboard");
 var gameboardDisplayEl = document.querySelector(".gameboard__display");
-// var gameboardDisplayEl = [];
-// gameboardDisplayEl[0] = document.querySelector(".gameboard__display__q1");
+// question 1
 var gameboardDisplayQ1El = document.querySelector(".gameboard__display__q1");
 var gameboardDisplayQ1ChoicesEl = document.querySelector(
   ".gameboard__display__q1__container"
 );
+var gameboardQ1correctEl = document.getElementById("#alerts");
+var gameboardQ1incorrectEl = [
+  'document.getElementByID("#strings")',
+  'document.getElementByID("#booleans")',
+  'document.getElementByID("#numbers")',
+];
+console.log(gameboardQ1incorrectEl);
+// question 2
 var gameboardDisplayQ2El = document.querySelector(".gameboard__display__q2");
-var gameboardDisplayQ1ChoicesEl = document.querySelector(
+var gameboardDisplayQ2ChoicesEl = document.querySelector(
   ".gameboard__display__q2__container"
 );
+// question 3
 var gameboardDisplayQ3El = document.querySelector(".gameboard__display__q3");
 var gameboardDisplayQ3ChoicesEl = document.querySelector(
   ".gameboard__display__q3__container"
 );
+// question 4
 var gameboardDisplayQ4El = document.querySelector(".gameboard__display__q4");
 var gameboardDisplayQ4ChoicesEl = document.querySelector(
   ".gameboard__display__q4__container"
 );
+// question 5
 var gameboardDisplayQ5El = document.querySelector(".gameboard__display__q5");
 var gameboardDisplayQ5ChoicesEl = document.querySelector(
   ".gameboard__display__q5__container"
@@ -48,7 +59,8 @@ var gameboardDisplayQ5ChoicesEl = document.querySelector(
 var gameboardResultEl = document.querySelector(".gameboard__result");
 var allDoneEl = document.querySelector(".alldone");
 var allDoneFinalScore = document.querySelector(".alldone__finalscore");
-var initialsInput = document.getElementById("initials");
+var initialsInput = document.getElementById("#initials");
+var submitEl = document.querySelector(".submit");
 
 /*
  3. Declare variables: state
@@ -67,7 +79,8 @@ var initialsInput = document.getElementById("initials");
 
 var timer = null;
 var timeLeft = 0;
-var correctAnswer = 0;
+var correctAnswer = 10;
+var clicks = 0;
 var incorrectAnswer = 0;
 var currentQuestionIndex;
 
@@ -77,7 +90,7 @@ var currentQuestionIndex;
     - e.g. Math constants, pre-created content (maybe the questions and answers?)
 */
 
-var kDuration = 30;
+var kDuration = 10;
 
 /*
  5. Identify events
@@ -99,25 +112,107 @@ var kDuration = 30;
 function init() {
   console.log("Quiz loading");
 
-  //hide highscores element
+  // hide highscores element
   highscoresEl.setAttribute("style", "display:none");
-  //hide all gameboard - all question container elements
-  gameboardEL.setAttribute("style", "display:none");
-  //hide all done element
+  // hide timer
+  timerEl.setAttribute("style", "display:none");
+  // hide all gameboard - all question container elements
+  gameboardDisplayQ1El.setAttribute("style", "display:none");
+  gameboardDisplayQ2El.setAttribute("style", "display:none");
+  gameboardDisplayQ3El.setAttribute("style", "display:none");
+  gameboardDisplayQ4El.setAttribute("style", "display:none");
+  gameboardDisplayQ5El.setAttribute("style", "display:none");
+  // hide all done element
   allDoneEl.setAttribute("style", "display:none");
 }
 
 // Event: Click starts
-function handleClickStart(ev) {
+function handleClickStart(event) {
   console.log("Quiz started");
 
   if (!timer) {
     //set time
+    timeLeft = kDuration;
+
     //start timer
+    timer = setInterval(handleTimerTick, 1000);
+
+    //hide welcome element
+    welcomeEl.setAttribute("style", "display:none");
+
+    //show question 1
+    gameboardDisplayQ1El.setAttribute("style", "display:block");
+
+    //answer to question 1
+
+    gameboardDisplayQ1ChoicesEl.addEventListener("click", function (event) {
+      // answer choice 3 is correct
+      var element1 = event.target;
+
+      if (element1.matches("#alerts")) {
+        correctAnswer++;
+      } else {
+        incorrectAnswer++;
+      }
+
+      console.log(correctAnswer);
+      console.log(incorrectAnswer);
+    });
   }
 }
 
 startQuizBoxEl.addEventListener("click", handleClickStart);
+
+// Event: Timer tick
+function handleTimerTick(ev) {
+  console.log("timer ticked");
+
+  // Show timer
+  timerEl.setAttribute("style", "display:block");
+
+  timeLeft--;
+
+  timerEl.textContent = timeLeft;
+
+  // Show alldone element
+  if (timeLeft === 0) allDoneEl.setAttribute("style", "display:block");
+  if (timeLeft === 0) handleGameEnds(true);
+}
+
+// // Event: Quiz ends
+function handleGameEnds() {
+  clearInterval(timer);
+  timer = null;
+
+  gameboardDisplayEl.setAttribute("style", "display:none");
+}
+
+//   // Initials submitted
+//   submitEl.addEventListener("click", InitialsSubmitted);
+// }
+
+// // User submitted initials
+// function InitialsSubmitted(event) {
+//   event.preventDefault();
+//   console.log(event);
+//   var userInitials = initialsInput.value;
+
+//   // Hide alldone element
+//   function hideAlldoneElement() {
+//     allDoneEl.setAttribute("style", "display:none");
+//   }
+
+//   submitEl.addEventListener("click", hideAlldoneElement);
+
+//   // Highscores element appears
+
+//   highscoresListEl.textContent = userInitials;
+
+//   //  function highscoresAppears() {
+//   //    highscoresEl.setAttribute("style", "display:block");
+//   //    highscoresListEl = userInitials;
+//   //  }
+// }
 
 /*
  6. Refactor & Helper functions
