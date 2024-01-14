@@ -95,8 +95,49 @@ var kDuration = 30;
       page. Start the execution of this setup function at the bottom of page
 */
 
+// Event: page load
+function init() {
+  console.log("Quiz loading");
+
+  //hide highscores element
+  highscoresEl.setAttribute("style", "display:none");
+  //hide all gameboard - all question container elements
+  gameboardEL.setAttribute("style", "display:none");
+  //hide all done element
+  allDoneEl.setAttribute("style", "display:none");
+}
+
+// Event: Click starts
+function handleClickStart(ev) {
+  console.log("Quiz started");
+
+  if (!timer) {
+    //set time
+    //start timer
+  }
+}
+
+startQuizBoxEl.addEventListener("click", handleClickStart);
+
 /*
  6. Refactor & Helper functions
     - identify tasks that can be broken into their own functions, outside the event handlers
     - Are there tasks that more than one event handler share?
 */
+
+function updateResult() {
+  //Update UI after each questions of right or wrong
+}
+
+// function hideElement(el) {
+//   //Hides things
+//   el.classList.add("hidden");
+// }
+
+function showElement(el) {
+  //Removes hide
+  el.classList.remove("hidden");
+}
+
+// Start the quiz
+init();
