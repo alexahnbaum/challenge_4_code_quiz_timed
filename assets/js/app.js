@@ -20,7 +20,7 @@
 var welcomeEl = document.querySelector(".welcome");
 var startQuizBoxEl = document.querySelector(".box__welcome");
 var highscoresEl = document.querySelector(".highscores");
-var highscoresListEl = document.getElementById("#highscores-list");
+var initialsHighscoreEl = document.getElementById("#initials-highscore");
 var highscoresBack = document.getElementById("#go_back");
 var highscoresClear = document.getElementById("#clear_highscores");
 var timerEl = document.querySelector(".timer");
@@ -388,22 +388,22 @@ function handleClickStart(event) {
       if (element5.matches("#console_log")) {
         correctAnswer++;
         gameboardDisplayQ5El.setAttribute("style", "display:none");
-        allDoneEl.setAttribute("style", "display:block");
+        handleGameEnds();
       }
       if (element5.matches("#JavaScript")) {
         correctAnswer--;
         gameboardDisplayQ5El.setAttribute("style", "display:none");
-        allDoneEl.setAttribute("style", "display:block");
+        handleGameEnds();
       }
       if (element5.matches("#terminal_bash")) {
         correctAnswer--;
         gameboardDisplayQ5El.setAttribute("style", "display:none");
-        allDoneEl.setAttribute("style", "display:block");
+        handleGameEnds();
       }
       if (element5.matches("#for_loops")) {
         correctAnswer--;
         gameboardDisplayQ5El.setAttribute("style", "display:none");
-        allDoneEl.setAttribute("style", "display:block");
+        handleGameEnds();
       }
 
       // Incorrect time deduction
@@ -428,47 +428,6 @@ function handleClickStart(event) {
 
       // Check points for correct answer
       console.log(correctAnswer);
-
-      // handleGameEnds();
-
-      var yourFinalScore = correctAnswer;
-      document.querySelector("#alldone-finalscore").textContent =
-        yourFinalScore;
-    });
-
-    // All Done Element
-    allDoneEl.addEventListener("click", function (event) {
-      var submitClick = event.target;
-
-      if (submitClick.matches("#submit")) {
-        allDoneEl.setAttribute("style", "display:none");
-        highscoresEl.setAttribute("style", "display:block");
-        displayInitialsScore();
-        document.querySelector("#highscores-list").textContent = typedInitials;
-      }
-
-      var typedInitials = initialsInputEl.value;
-      console.log(typedInitials);
-    });
-
-    // User types initials
-    function displayInitialsScore() {
-      var typedInitials = initialsInputEl.value;
-      console.log(typedInitials);
-      document.querySelector("#initials-highscore").textContent =
-        typedInitials + "-" + correctAnswer;
-    }
-
-    // Go back and clear highscore buttons
-    highscoresEl.addEventListener("click", function (event) {
-      var backClear = event.target;
-
-      if (backClear.matches("#go_back")) {
-        location.replace(location.href);
-      }
-      if (backClear.matches("#clear_highscores")) {
-        highscoresListEl.setAttribute("style", "display:none");
-      }
     });
   }
 }
@@ -499,6 +458,48 @@ function handleGameEnds() {
   gameboardDisplayEl.setAttribute("style", "display:none");
   timerEl.setAttribute("style", "display:none");
   allDoneEl.setAttribute("style", "display:block");
+
+  console.log("game ended");
+
+  // alldone.div stating what user's final score is
+  var yourFinalScore = correctAnswer;
+  document.querySelector("#alldone-finalscore").textContent = yourFinalScore;
+
+  // All Done Element
+  allDoneEl.addEventListener("click", function (event) {
+    var submitClick = event.target;
+
+    if (submitClick.matches("#submit")) {
+      allDoneEl.setAttribute("style", "display:none");
+      highscoresEl.setAttribute("style", "display:block");
+      displayInitialsScore();
+      document.querySelector("#highscores-list").textContent =
+        initialsHighscoreEl;
+    }
+
+    var typedInitials = initialsInputEl.value;
+    console.log(typedInitials);
+  });
+
+  // User types initials
+  function displayInitialsScore() {
+    var typedInitials = initialsInputEl.value;
+    console.log(typedInitials);
+    document.querySelector("#initials-highscore").textContent =
+      typedInitials + "-" + correctAnswer;
+  }
+
+  // Go back and clear highscore buttons
+  highscoresEl.addEventListener("click", function (event) {
+    var backClear = event.target;
+
+    if (backClear.matches("#go_back")) {
+      location.replace(location.href);
+    }
+    if (backClear.matches("#clear_highscores")) {
+      initialsHighscoreEl.setAttribute("style", "disaply:none");
+    }
+  });
 }
 
 /*
