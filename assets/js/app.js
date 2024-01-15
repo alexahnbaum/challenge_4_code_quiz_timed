@@ -20,7 +20,9 @@
 var welcomeEl = document.querySelector(".welcome");
 var startQuizBoxEl = document.querySelector(".box__welcome");
 var highscoresEl = document.querySelector(".highscores");
-var highscoresListEl = document.querySelector(".highscores__list");
+var highscoresListEl = document.getElementById("#highscores-list");
+var highscoresBack = document.getElementById("#go_back");
+var highscoresClear = document.getElementById("#clear_highscores");
 var timerEl = document.querySelector(".timer");
 var gameboardEL = document.querySelector(".gameboard");
 var gameboardDisplayEl = document.querySelector(".gameboard__display");
@@ -35,32 +37,56 @@ var gameboardQ1incorrectEl = [
   'document.getElementByID("#booleans")',
   'document.getElementByID("#numbers")',
 ];
-console.log(gameboardQ1incorrectEl);
 // question 2
 var gameboardDisplayQ2El = document.querySelector(".gameboard__display__q2");
 var gameboardDisplayQ2ChoicesEl = document.querySelector(
   ".gameboard__display__q2__container"
 );
+var gameboardQ2correctEl = document.getElementById("#curly_brackets");
+var gameboardQ2incorrectEl = [
+  'document.getElementByID("#quotes")',
+  'document.getElementByID("#parenthesis")',
+  'document.getElementByID("#square_brackets")',
+];
 // question 3
 var gameboardDisplayQ3El = document.querySelector(".gameboard__display__q3");
 var gameboardDisplayQ3ChoicesEl = document.querySelector(
   ".gameboard__display__q3__container"
 );
+var gameboardQ3correctEl = document.getElementById("#all_of_the_above");
+var gameboardQ3incorrectEl = [
+  'document.getElementByID("#numbers_and_strings")',
+  'document.getElementByID("#other_arrays")',
+  'document.getElementByID("#booleans_second")',
+];
 // question 4
 var gameboardDisplayQ4El = document.querySelector(".gameboard__display__q4");
 var gameboardDisplayQ4ChoicesEl = document.querySelector(
   ".gameboard__display__q4__container"
 );
+var gameboardQ4correctEl = document.getElementById("#quotes_second");
+var gameboardQ4incorrectEl = [
+  'document.getElementByID("#commas")',
+  'document.getElementByID("#curly_brackets_second")',
+  'document.getElementByID("#parenthesis_second")',
+];
 // question 5
 var gameboardDisplayQ5El = document.querySelector(".gameboard__display__q5");
 var gameboardDisplayQ5ChoicesEl = document.querySelector(
   ".gameboard__display__q5__container"
 );
+var gameboardQ5correctEl = document.getElementById("#console_log");
+var gameboardQ5incorrectEl = [
+  'document.getElementByID("#JavaScript")',
+  'document.getElementByID("#terminal_/_bash")',
+  'document.getElementByID("#for_loops")',
+];
+// Other DOM hooks
 var gameboardResultEl = document.querySelector(".gameboard__result");
 var allDoneEl = document.querySelector(".alldone");
-var allDoneFinalScore = document.querySelector(".alldone__finalscore");
-var initialsInput = document.getElementById("#initials");
-var submitEl = document.querySelector(".submit");
+var allDoneFinalScoreEl = document.querySelector(".alldone__finalscore");
+var initialsInputEl = document.querySelector("#initials");
+var submitEl = document.getElementById("#submit");
 
 /*
  3. Declare variables: state
@@ -90,7 +116,7 @@ var currentQuestionIndex;
     - e.g. Math constants, pre-created content (maybe the questions and answers?)
 */
 
-var kDuration = 10;
+var kDuration = 60;
 
 /*
  5. Identify events
@@ -130,6 +156,7 @@ function init() {
 function handleClickStart(event) {
   console.log("Quiz started");
 
+  event;
   if (!timer) {
     //set time
     timeLeft = kDuration;
@@ -143,20 +170,305 @@ function handleClickStart(event) {
     //show question 1
     gameboardDisplayQ1El.setAttribute("style", "display:block");
 
-    //answer to question 1
+    //click answer choices for QUESTION 1
 
     gameboardDisplayQ1ChoicesEl.addEventListener("click", function (event) {
-      // answer choice 3 is correct
+      // Answer choice C is correct
       var element1 = event.target;
 
+      // Point distribution and next page
       if (element1.matches("#alerts")) {
         correctAnswer++;
-      } else {
-        incorrectAnswer++;
+        gameboardDisplayQ1El.setAttribute("style", "display:none");
+        gameboardDisplayQ2El.setAttribute("style", "display:block");
+      }
+      if (element1.matches("#strings")) {
+        correctAnswer--;
+        gameboardDisplayQ1El.setAttribute("style", "display:none");
+        gameboardDisplayQ2El.setAttribute("style", "display:block");
+      }
+      if (element1.matches("#booleans")) {
+        correctAnswer--;
+        gameboardDisplayQ1El.setAttribute("style", "display:none");
+        gameboardDisplayQ2El.setAttribute("style", "display:block");
+      }
+      if (element1.matches("#numbers")) {
+        correctAnswer--;
+        gameboardDisplayQ1El.setAttribute("style", "display:none");
+        gameboardDisplayQ2El.setAttribute("style", "display:block");
       }
 
+      // Incorrect time deduction
+      if (element1.matches("#strings") && timeLeft > 10) {
+        timeLeft -= 9;
+      }
+      if (element1.matches("#booleans") && timeLeft > 10) {
+        timeLeft -= 9;
+      }
+      if (element1.matches("#numbers") && timeLeft > 10) {
+        timeLeft -= 9;
+      }
+      if (element1.matches("#strings") && timeLeft < 10) {
+        timeLeft = 1;
+      }
+      if (element1.matches("#booleans") && timeLeft < 10) {
+        timeLeft = 1;
+      }
+      if (element1.matches("#numbers") && timeLeft < 10) {
+        timeLeft = 1;
+      }
+
+      // Check points for correct answer
       console.log(correctAnswer);
-      console.log(incorrectAnswer);
+    });
+
+    //click answer choices for QUESTION 2
+
+    gameboardDisplayQ2ChoicesEl.addEventListener("click", function (event) {
+      // Answer choice B is correct
+      var element2 = event.target;
+
+      // Point distribution and next page
+      if (element2.matches("#curly_brackets")) {
+        correctAnswer++;
+        gameboardDisplayQ2El.setAttribute("style", "display:none");
+        gameboardDisplayQ3El.setAttribute("style", "display:block");
+      }
+      if (element2.matches("#quotes")) {
+        correctAnswer--;
+        gameboardDisplayQ2El.setAttribute("style", "display:none");
+        gameboardDisplayQ3El.setAttribute("style", "display:block");
+      }
+      if (element2.matches("#parenthesis")) {
+        correctAnswer--;
+        gameboardDisplayQ2El.setAttribute("style", "display:none");
+        gameboardDisplayQ3El.setAttribute("style", "display:block");
+      }
+      if (element2.matches("#square_brackets")) {
+        correctAnswer--;
+        gameboardDisplayQ2El.setAttribute("style", "display:none");
+        gameboardDisplayQ3El.setAttribute("style", "display:block");
+      }
+
+      // Incorrect time deduction
+      if (element2.matches("#quotes") && timeLeft > 10) {
+        timeLeft -= 9;
+      }
+      if (element2.matches("#parenthesis") && timeLeft > 10) {
+        timeLeft -= 9;
+      }
+      if (element2.matches("#square_brackets") && timeLeft > 10) {
+        timeLeft -= 9;
+      }
+      if (element2.matches("#quotes") && timeLeft < 10) {
+        timeLeft = 1;
+      }
+      if (element2.matches("#parenthesis") && timeLeft < 10) {
+        timeLeft = 1;
+      }
+      if (element2.matches("#square_brackets") && timeLeft < 10) {
+        timeLeft = 1;
+      }
+
+      // Check points for correct answer
+      console.log(correctAnswer);
+    });
+
+    //click answer choices for QUESTION 3
+
+    gameboardDisplayQ3ChoicesEl.addEventListener("click", function (event) {
+      // Answer choice D is correct
+      var element3 = event.target;
+
+      // Point distribution and next page
+      if (element3.matches("#all_of_the_above")) {
+        correctAnswer++;
+        gameboardDisplayQ3El.setAttribute("style", "display:none");
+        gameboardDisplayQ4El.setAttribute("style", "display:block");
+      }
+      if (element3.matches("#numbers_and_strings")) {
+        correctAnswer--;
+        gameboardDisplayQ3El.setAttribute("style", "display:none");
+        gameboardDisplayQ4El.setAttribute("style", "display:block");
+      }
+      if (element3.matches("#other_arrays")) {
+        correctAnswer--;
+        gameboardDisplayQ3El.setAttribute("style", "display:none");
+        gameboardDisplayQ4El.setAttribute("style", "display:block");
+      }
+      if (element3.matches("#booleans_second")) {
+        correctAnswer--;
+        gameboardDisplayQ3El.setAttribute("style", "display:none");
+        gameboardDisplayQ4El.setAttribute("style", "display:block");
+      }
+
+      // Incorrect time deduction
+      if (element3.matches("#numbers_and_strings") && timeLeft > 10) {
+        timeLeft -= 9;
+      }
+      if (element3.matches("#other_arrays") && timeLeft > 10) {
+        timeLeft -= 9;
+      }
+      if (element3.matches("#booleans_second") && timeLeft > 10) {
+        timeLeft -= 9;
+      }
+      if (element3.matches("#numbers_and_strings") && timeLeft < 10) {
+        timeLeft = 1;
+      }
+      if (element3.matches("#other_arrays") && timeLeft < 10) {
+        timeLeft = 1;
+      }
+      if (element3.matches("#booleans_second") && timeLeft < 10) {
+        timeLeft = 1;
+      }
+
+      // Check points for correct answer
+      console.log(correctAnswer);
+    });
+
+    //click answer choices for QUESTION 4
+
+    gameboardDisplayQ4ChoicesEl.addEventListener("click", function (event) {
+      // Answer choice C is correct
+      var element4 = event.target;
+
+      // Point distribution and next page
+      if (element4.matches("#quotes_second")) {
+        correctAnswer++;
+        gameboardDisplayQ4El.setAttribute("style", "display:none");
+        gameboardDisplayQ5El.setAttribute("style", "display:block");
+      }
+      if (element4.matches("#commas")) {
+        correctAnswer--;
+        gameboardDisplayQ4El.setAttribute("style", "display:none");
+        gameboardDisplayQ5El.setAttribute("style", "display:block");
+      }
+      if (element4.matches("#curly_brackets_second")) {
+        correctAnswer--;
+        gameboardDisplayQ4El.setAttribute("style", "display:none");
+        gameboardDisplayQ5El.setAttribute("style", "display:block");
+      }
+      if (element4.matches("#parenthesis_second")) {
+        correctAnswer--;
+        gameboardDisplayQ4El.setAttribute("style", "display:none");
+        gameboardDisplayQ5El.setAttribute("style", "display:block");
+      }
+
+      // Incorrect time deduction
+      if (element4.matches("#commas") && timeLeft > 10) {
+        timeLeft -= 9;
+      }
+      if (element4.matches("#curly_brackets_second") && timeLeft > 10) {
+        timeLeft -= 9;
+      }
+      if (element4.matches("#parenthesis_second") && timeLeft > 10) {
+        timeLeft -= 9;
+      }
+      if (element4.matches("#commas") && timeLeft < 10) {
+        timeLeft = 1;
+      }
+      if (element4.matches("#curly_brackets_second") && timeLeft < 10) {
+        timeLeft = 1;
+      }
+      if (element4.matches("#parenthesis_second") && timeLeft < 10) {
+        timeLeft = 1;
+      }
+
+      // Check points for correct answer
+      console.log(correctAnswer);
+    });
+
+    //click answer choices for QUESTION 5
+
+    gameboardDisplayQ5ChoicesEl.addEventListener("click", function (event) {
+      // Answer choice D is correct
+      var element5 = event.target;
+
+      // Point distribution and next page
+      if (element5.matches("#console_log")) {
+        correctAnswer++;
+        gameboardDisplayQ5El.setAttribute("style", "display:none");
+        allDoneEl.setAttribute("style", "display:block");
+      }
+      if (element5.matches("#JavaScript")) {
+        correctAnswer--;
+        gameboardDisplayQ5El.setAttribute("style", "display:none");
+        allDoneEl.setAttribute("style", "display:block");
+      }
+      if (element5.matches("#terminal_bash")) {
+        correctAnswer--;
+        gameboardDisplayQ5El.setAttribute("style", "display:none");
+        allDoneEl.setAttribute("style", "display:block");
+      }
+      if (element5.matches("#for_loops")) {
+        correctAnswer--;
+        gameboardDisplayQ5El.setAttribute("style", "display:none");
+        allDoneEl.setAttribute("style", "display:block");
+      }
+
+      // Incorrect time deduction
+      if (element5.matches("#JavaScript") && timeLeft > 10) {
+        timeLeft -= 9;
+      }
+      if (element5.matches("#terminal_bash") && timeLeft > 10) {
+        timeLeft -= 9;
+      }
+      if (element5.matches("#for_loops") && timeLeft > 10) {
+        timeLeft -= 9;
+      }
+      if (element5.matches("#JavaScript") && timeLeft < 10) {
+        timeLeft = 1;
+      }
+      if (element5.matches("#terminal_bash") && timeLeft < 10) {
+        timeLeft = 1;
+      }
+      if (element5.matches("#for_loops") && timeLeft < 10) {
+        timeLeft = 1;
+      }
+
+      // Check points for correct answer
+      console.log(correctAnswer);
+
+      // handleGameEnds();
+
+      var yourFinalScore = correctAnswer;
+      document.querySelector("#alldone-finalscore").textContent =
+        yourFinalScore;
+    });
+
+    // All Done Element
+    allDoneEl.addEventListener("click", function (event) {
+      var submitClick = event.target;
+
+      if (submitClick.matches("#submit")) {
+        allDoneEl.setAttribute("style", "display:none");
+        highscoresEl.setAttribute("style", "display:block");
+        displayInitialsScore();
+        document.querySelector("#highscores-list").textContent = typedInitials;
+      }
+
+      var typedInitials = initialsInputEl.value;
+      console.log(typedInitials);
+    });
+
+    // User types initials
+    function displayInitialsScore() {
+      var typedInitials = initialsInputEl.value;
+      console.log(typedInitials);
+      document.querySelector("#initials-highscore").textContent =
+        typedInitials + "-" + correctAnswer;
+    }
+
+    // Go back and clear highscore buttons
+    highscoresEl.addEventListener("click", function (event) {
+      var backClear = event.target;
+
+      if (backClear.matches("#go_back")) {
+        location.replace(location.href);
+      }
+      if (backClear.matches("#clear_highscores")) {
+        highscoresListEl.setAttribute("style", "display:none");
+      }
     });
   }
 }
@@ -185,54 +497,15 @@ function handleGameEnds() {
   timer = null;
 
   gameboardDisplayEl.setAttribute("style", "display:none");
+  timerEl.setAttribute("style", "display:none");
+  allDoneEl.setAttribute("style", "display:block");
 }
-
-//   // Initials submitted
-//   submitEl.addEventListener("click", InitialsSubmitted);
-// }
-
-// // User submitted initials
-// function InitialsSubmitted(event) {
-//   event.preventDefault();
-//   console.log(event);
-//   var userInitials = initialsInput.value;
-
-//   // Hide alldone element
-//   function hideAlldoneElement() {
-//     allDoneEl.setAttribute("style", "display:none");
-//   }
-
-//   submitEl.addEventListener("click", hideAlldoneElement);
-
-//   // Highscores element appears
-
-//   highscoresListEl.textContent = userInitials;
-
-//   //  function highscoresAppears() {
-//   //    highscoresEl.setAttribute("style", "display:block");
-//   //    highscoresListEl = userInitials;
-//   //  }
-// }
 
 /*
  6. Refactor & Helper functions
     - identify tasks that can be broken into their own functions, outside the event handlers
     - Are there tasks that more than one event handler share?
 */
-
-function updateResult() {
-  //Update UI after each questions of right or wrong
-}
-
-// function hideElement(el) {
-//   //Hides things
-//   el.classList.add("hidden");
-// }
-
-function showElement(el) {
-  //Removes hide
-  el.classList.remove("hidden");
-}
 
 // Start the quiz
 init();

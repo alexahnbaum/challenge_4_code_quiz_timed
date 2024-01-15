@@ -18,10 +18,12 @@
       </section>
       <section class="highscores">
         <h1>Highscores</h1>
-        <div class="highscores__list">1. AB 30</div>
+        <div class><span id="initials-highscore"></span></div>
+        <div>testing <span id="highscores-list"></span></div>
         <div class="highscores__container">
-            <div class="box__highscores" option-choice="1 go back">Go Back</div>
-            <div class="box__highscores" option-choice="2 Clear Highscores">Clear Highscores</div>
+            <div class="box__highscores" id="go_back">Go Back</div>
+            <div class="box__highscores" id="clear_highscores">Clear Highscores</div>
+        </div>
       </section>
       <section class="gameboard">
         <div class="gameboard__display">
@@ -39,12 +41,12 @@
               The condition in an if / else statement is enclosed within ____.
             </h1>
             <div class="gameboard__display__q2__container">
-              <div class="box" answer-choice="1 quotes">1 quotes</div>
-              <div class="box" answer-choice="2 curly brackets">
+              <div class="box" id="quotes">1 quotes</div>
+              <div class="box" id="curly_brackets">
                 2 curly brackets
               </div>
-              <div class="box" answer-choice="3 parenthesis">3 parenthesis</div>
-              <div class="box" answer-choice="4 square brackets">
+              <div class="box" id="parenthesis">3 parenthesis</div>
+              <div class="box" id="square_brackets">
                 4 square brackets
               </div>
             </div>
@@ -52,14 +54,14 @@
           <div class="gameboard__display__q3">
             <h1>Arrays in JavaScript can be used to store ___.</h1>
             <div class="gameboard__display__q3__container">
-              <div class="box" answer-choice="1 numbers and strings">
+              <div class="box" id="numbers_and_strings">
                 1 numbers and strings
               </div>
-              <div class="box" answer-choice="2 other arrays">
+              <div class="box" id="other_arrays">
                 2 other arrays
               </div>
-              <div class="box" answer-choice="3 booleans">3 booleans</div>
-              <div class="box" answer-choice="4 all of the above">
+              <div class="box" id="booleans_second">3 booleans</div>
+              <div class="box" id="all_of_the_above">
                 4 all of the above
               </div>
             </div>
@@ -70,12 +72,12 @@
               variables.
             </h1>
             <div class="gameboard__display__q4__container">
-              <div class="box" answer-choice="1 commas">1 commas</div>
-              <div class="box" answer-choice="2 curly brackets">
+              <div class="box" id="commas">1 commas</div>
+              <div class="box" id="curly_brackets_second">
                 2 curly brackets
               </div>
-              <div class="box" answer-choice="3 quotes">3 quotes</div>
-              <div class="box" answer-choice="4 parenthesis">4 parenthesis</div>
+              <div class="box" id="quotes_second">3 quotes</div>
+              <div class="box" id="parenthesis_second">4 parenthesis</div>
             </div>
           </div>
           <div class="gameboard__display__q5">
@@ -84,12 +86,12 @@
               printing content to the debugger is
             </h1>
             <div class="gameboard__display__q5__container">
-              <div class="box" answer-choice="1 JavaScript">1 JavaScript</div>
-              <div class="box" answer-choice="2 terminal / bash">
+              <div class="box" id="JavaScript">1 JavaScript</div>
+              <div class="box" id="terminal_bash">
                 2 terminal / bash
               </div>
-              <div class="box" answer-choice="3 for loops">3 for loops</div>
-              <div class="box" answer-choice="4 console log">4 console log</div>
+              <div class="box" id="for_loops">3 for loops</div>
+              <div class="box" id="console_log">4 console log</div>
             </div>
           </div>
         </div>
@@ -98,10 +100,10 @@
       <div class="timer"></div>
       <section class="alldone">
          <h1>All done!</h1>
-         <div class="alldone__finalscore"></div>
+         <div class>Your final score is <span id="alldone-finalscore"></span></div>
          <label for="initials">Enter Initials</label>
-         <input type="text" id="initials">
-         <input type="submit" value="submit"> 
+         <input type="text" id="initials" />
+         <button id="submit">Submit</button> 
       </section>
 
       <script src="assets/js/app.js"></script>
