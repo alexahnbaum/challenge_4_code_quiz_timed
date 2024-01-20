@@ -20,9 +20,10 @@
 var welcomeEl = document.querySelector(".welcome");
 var startQuizBoxEl = document.querySelector(".box__welcome");
 var highscoresEl = document.querySelector(".highscores");
-var initialsHighscoreEl = document.getElementById("#initials-highscore");
-var highscoresBack = document.getElementById("#go_back");
-var highscoresClear = document.getElementById("#clear_highscores");
+var initialsHighscoreEl = document.getElementById("initials-highscore");
+// var highscoresListEl = document.getElementById("#highscores-list");
+var highscoresBackEl = document.getElementById("#go_back");
+var highscoresClearEl = document.getElementById("#clear_highscores");
 var timerEl = document.querySelector(".timer");
 var gameboardEL = document.querySelector(".gameboard");
 var gameboardDisplayEl = document.querySelector(".gameboard__display");
@@ -473,13 +474,22 @@ function handleGameEnds() {
       allDoneEl.setAttribute("style", "display:none");
       highscoresEl.setAttribute("style", "display:block");
       displayInitialsScore();
-      document.querySelector("#highscores-list").textContent =
-        initialsHighscoreEl;
+
+      // document.querySelector("#highscores-list").textContent = correctAnswer;
+
+      //   initialsHighscoreEl;
+      var clearHighscoresButton = document.querySelector("#clear_highscores");
+      clearHighscoresButton.addEventListener("click", computeHighscore);
     }
 
-    var typedInitials = initialsInputEl.value;
-    console.log(typedInitials);
+    //  var typedInitials = initialsInputEl.value;
+    //  console.log(typedInitials);
   });
+
+  function computeHighscore() {
+    console.log("clear high scores");
+    document.querySelector("#highscores-list").textContent = "";
+  }
 
   // User types initials
   function displayInitialsScore() {
@@ -487,20 +497,79 @@ function handleGameEnds() {
     console.log(typedInitials);
     document.querySelector("#initials-highscore").textContent =
       typedInitials + "-" + correctAnswer;
+
+    // Created variable to send to local storage of initials and score
+    if (typedInitials !== "") {
+      var dataInitialsScore =
+        JSON.parse(localStorage.getItem("highscore")) || [];
+      // document.querySelector("#initials-highscore").textContent =
+      //   dataInitialsScore;
+    }
+    //  var dataInitialsScore = typedInitials + "-" + correctAnswer;
+    var dataScore = {
+      initials: typedInitials,
+      score: correctAnswer,
+    };
+    dataInitialsScore.push(dataScore);
+    console.log(dataInitialsScore);
+
+    localStorage.setItem("highscore", JSON.stringify(dataInitialsScore));
+
+    renderFinalScores();
+  }
+}
+
+function renderFinalScores() {
+  var dataInitialsScore = JSON.parse(localStorage.getItem("highscore")) || [];
+  console.log(dataInitialsScore);
+  dataInitialsScore.sort(function (a, b) {
+    return b.score - a.score;
+  });
+  for (let i = 0; i < dataInitialsScore.length; i += 1) {
+    var liEl = document.createElement("li");
+    liEl.textContent =
+      "initials: " +
+      dataInitialsScore[i].initials +
+      "-" +
+      "score: " +
+      dataInitialsScore[i].score;
+    initialsHighscoreEl.append(liEl);
+  }
+}
+
+// Check to see if there is a high score in local storage
+// If no, set score to high score in local storage
+//  if (localStorage.getItem("highscore") === false) {
+//    document.querySelector("#initials-highscore").textContent =
+//      dataInitialsScore;
+//  }
+
+// If yes, check if high score from local storage is greater than current score
+//   if (
+//     localStorage.getItem("highscore") === true &&
+//     dataInitialsScore > correctAnswer
+//   ) {
+//     document.querySelector("#initials-highscore").textContent =
+//       dataInitialsScore;
+//   } else {
+//     document.querySelector("#initials-highscore").textContent =
+//       typedInitials + "-" + correctAnswer;
+//   }
+// }
+
+// Go back and clear highscore buttons
+highscoresEl.addEventListener("click", function (event) {
+  var backClear = event.target;
+
+  if (backClear.matches("#clear_highscores")) {
+    initialsHighscoreEl.setAttribute("style", "disaply:none");
   }
 
-  // Go back and clear highscore buttons
-  highscoresEl.addEventListener("click", function (event) {
-    var backClear = event.target;
-
-    if (backClear.matches("#go_back")) {
-      location.replace(location.href);
-    }
-    if (backClear.matches("#clear_highscores")) {
-      initialsHighscoreEl.setAttribute("style", "disaply:none");
-    }
-  });
-}
+  if (backClear.matches("#go_back")) {
+    location.replace(location.href);
+  }
+});
+// }
 
 /*
  6. Refactor & Helper functions
